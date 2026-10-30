@@ -1,0 +1,103 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 4,
+    "minor": 2,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "msvc2026-base",
+      "hidden": true,
+      "displayName": "MSVC 2026 x64",
+      "generator": "Visual Studio 18 2026",
+      "architecture": {
+        "value": "x64",
+        "strategy": "set"
+      },
+      "toolset": {
+        "value": "host=x64",
+        "strategy": "set"
+      },
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "cacheVariables": {
+        "CMAKE_PREFIX_PATH": {
+          "type": "PATH",
+          "value": "C:/Qt/5.15.2/msvc2019_64"
+        },
+        "CMAKE_CXX_STANDARD": "17"
+      }
+    },
+    {
+      "name": "msvc2026-debug",
+      "displayName": "MSVC 2026 x64 - Debug",
+      "description": "Visual Studio 2026, MSVC x64, Qt 5.15.2, Debug",
+      "inherits": "msvc2026-base",
+      "cacheVariables": {
+        "CMAKE_CONFIGURATION_TYPES": "Debug"
+      }
+    },
+    {
+      "name": "msvc2026-release",
+      "displayName": "MSVC 2026 x64 - Release",
+      "description": "Visual Studio 2026, MSVC x64, Qt 5.15.2, Release",
+      "inherits": "msvc2026-base",
+      "cacheVariables": {
+        "CMAKE_CONFIGURATION_TYPES": "Release"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "msvc2026-debug",
+      "displayName": "Build Debug",
+      "configurePreset": "msvc2026-debug",
+      "configuration": "Debug",
+      "jobs": 8
+    },
+    {
+      "name": "msvc2026-release",
+      "displayName": "Build Release",
+      "configurePreset": "msvc2026-release",
+      "configuration": "Release",
+      "jobs": 8
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "msvc2026-debug",
+      "displayName": "Configure and build Debug",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "msvc2026-debug"
+        },
+        {
+          "type": "build",
+          "name": "msvc2026-debug"
+        }
+      ]
+    },
+    {
+      "name": "msvc2026-release",
+      "displayName": "Configure and build Release",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "msvc2026-release"
+        },
+        {
+          "type": "build",
+          "name": "msvc2026-release"
+        }
+      ]
+    }
+  ]
+}
+

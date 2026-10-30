@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug ComplexQGLWidgetDemo",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${command:cmake.launchTargetPath}",
+      "cwd": "${command:cmake.getLaunchTargetDirectory}",
+      "console": "internalConsole"
+    }
+  ]
+}
+
